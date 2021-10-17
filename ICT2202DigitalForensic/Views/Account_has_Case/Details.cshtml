@@ -1,0 +1,50 @@
+﻿@model ICT2202DigitalForensic.Models.Account_has_Case
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Account_has_Case</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_accessed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_accessed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Case_Number.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Case_Number.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
