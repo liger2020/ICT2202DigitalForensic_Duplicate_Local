@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="idAccount" />
           </Key>
-          <Property Name="idAccount" Type="int" Nullable="false" />
+          <Property Name="idAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="First_Name" Type="varchar" MaxLength="45" Nullable="false" />
@@ -29,10 +29,11 @@
           <Key>
             <PropertyRef Name="idCase" />
           </Key>
-          <Property Name="idCase" Type="int" Nullable="false" />
+          <Property Name="idCase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Hash" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Account_h__Accou__3A81B327">
+        <Association Name="FK__Account_h__Accou__4D94879B">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
           <ReferentialConstraint>
@@ -44,7 +45,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Account_h__Case___3B75D760">
+        <Association Name="FK__Account_h__Case___4E88ABD4">
           <End Role="Case_Number" Type="Self.Case_Number" Multiplicity="1" />
           <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
           <ReferentialConstraint>
@@ -60,11 +61,11 @@
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Account_has_Case" EntityType="Self.Account_has_Case" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Case_Number" EntityType="Self.Case_Number" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Account_h__Accou__3A81B327" Association="Self.FK__Account_h__Accou__3A81B327">
+          <AssociationSet Name="FK__Account_h__Accou__4D94879B" Association="Self.FK__Account_h__Accou__4D94879B">
             <End Role="Account" EntitySet="Account" />
             <End Role="Account_has_Case" EntitySet="Account_has_Case" />
           </AssociationSet>
-          <AssociationSet Name="FK__Account_h__Case___3B75D760" Association="Self.FK__Account_h__Case___3B75D760">
+          <AssociationSet Name="FK__Account_h__Case___4E88ABD4" Association="Self.FK__Account_h__Case___4E88ABD4">
             <End Role="Case_Number" EntitySet="Case_Number" />
             <End Role="Account_has_Case" EntitySet="Account_has_Case" />
           </AssociationSet>
@@ -78,12 +79,12 @@
           <Key>
             <PropertyRef Name="idAccount" />
           </Key>
-          <Property Name="idAccount" Type="Int32" Nullable="false" />
+          <Property Name="idAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="First_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Last_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Account_has_Case" Relationship="Self.FK__Account_h__Accou__3A81B327" FromRole="Account" ToRole="Account_has_Case" />
+          <NavigationProperty Name="Account_has_Case" Relationship="Self.FK__Account_h__Accou__4D94879B" FromRole="Account" ToRole="Account_has_Case" />
         </EntityType>
         <EntityType Name="Account_has_Case">
           <Key>
@@ -94,18 +95,19 @@
           <Property Name="Case_idCase" Type="Int32" Nullable="false" />
           <Property Name="Last_modified" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Last_accessed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Account_h__Accou__3A81B327" FromRole="Account_has_Case" ToRole="Account" />
-          <NavigationProperty Name="Case_Number" Relationship="Self.FK__Account_h__Case___3B75D760" FromRole="Account_has_Case" ToRole="Case_Number" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account_h__Accou__4D94879B" FromRole="Account_has_Case" ToRole="Account" />
+          <NavigationProperty Name="Case_Number" Relationship="Self.FK__Account_h__Case___4E88ABD4" FromRole="Account_has_Case" ToRole="Case_Number" />
         </EntityType>
         <EntityType Name="Case_Number">
           <Key>
             <PropertyRef Name="idCase" />
           </Key>
-          <Property Name="idCase" Type="Int32" Nullable="false" />
+          <Property Name="idCase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Account_has_Case" Relationship="Self.FK__Account_h__Case___3B75D760" FromRole="Case_Number" ToRole="Account_has_Case" />
+          <Property Name="Hash" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Account_has_Case" Relationship="Self.FK__Account_h__Case___4E88ABD4" FromRole="Case_Number" ToRole="Account_has_Case" />
         </EntityType>
-        <Association Name="FK__Account_h__Accou__3A81B327">
+        <Association Name="FK__Account_h__Accou__4D94879B">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
           <ReferentialConstraint>
@@ -117,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Account_h__Case___3B75D760">
+        <Association Name="FK__Account_h__Case___4E88ABD4">
           <End Role="Case_Number" Type="Self.Case_Number" Multiplicity="1" />
           <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
           <ReferentialConstraint>
@@ -129,15 +131,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ICT2202ProjectEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ICT2202DigitalForensic" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Account_has_Case" EntityType="Self.Account_has_Case" />
           <EntitySet Name="Case_Number" EntityType="Self.Case_Number" />
-          <AssociationSet Name="FK__Account_h__Accou__3A81B327" Association="Self.FK__Account_h__Accou__3A81B327">
+          <AssociationSet Name="FK__Account_h__Accou__4D94879B" Association="Self.FK__Account_h__Accou__4D94879B">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Account_has_Case" EntitySet="Account_has_Case" />
           </AssociationSet>
-          <AssociationSet Name="FK__Account_h__Case___3B75D760" Association="Self.FK__Account_h__Case___3B75D760">
+          <AssociationSet Name="FK__Account_h__Case___4E88ABD4" Association="Self.FK__Account_h__Case___4E88ABD4">
             <End Role="Case_Number" EntitySet="Case_Number" />
             <End Role="Account_has_Case" EntitySet="Account_has_Case" />
           </AssociationSet>
@@ -147,7 +149,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ICT2202ProjectModelStoreContainer" CdmEntityContainer="ICT2202ProjectEntities">
+        <EntityContainerMapping StorageEntityContainer="ICT2202ProjectModelStoreContainer" CdmEntityContainer="ICT2202DigitalForensic">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="ICT2202ProjectModel.Account">
               <MappingFragment StoreEntitySet="Account">
@@ -174,6 +176,7 @@
               <MappingFragment StoreEntitySet="Case_Number">
                 <ScalarProperty Name="idCase" ColumnName="idCase" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

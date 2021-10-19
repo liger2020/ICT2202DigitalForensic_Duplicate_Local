@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ICT2202DigitalForensic.Models
+namespace ICT2202DigitalForensic
 {
     using System;
     using System.Collections.Generic;

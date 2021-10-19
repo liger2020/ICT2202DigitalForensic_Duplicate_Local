@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ICT2202ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Account_has_Case">
+          <Key>
+            <PropertyRef Name="Account_idAccount" />
+            <PropertyRef Name="Case_idCase" />
+          </Key>
+          <Property Name="Account_idAccount" Type="int" Nullable="false" />
+          <Property Name="Case_idCase" Type="int" Nullable="false" />
+          <Property Name="Last_modified" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Last_accessed" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Case_Number">
+          <Key>
+            <PropertyRef Name="idCase" />
+          </Key>
+          <Property Name="idCase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Hash" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Account_h__Accou__4D94879B">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="Account_has_Case">
+              <PropertyRef Name="Account_idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_h__Case___4E88ABD4">
+          <End Role="Case_Number" Type="Self.Case_Number" Multiplicity="1" />
+          <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Case_Number">
+              <PropertyRef Name="idCase" />
+            </Principal>
+            <Dependent Role="Account_has_Case">
+              <PropertyRef Name="Case_idCase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ICT2202ProjectModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_has_Case" EntityType="Self.Account_has_Case" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Case_Number" EntityType="Self.Case_Number" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account_h__Accou__4D94879B" Association="Self.FK__Account_h__Accou__4D94879B">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account_has_Case" EntitySet="Account_has_Case" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_h__Case___4E88ABD4" Association="Self.FK__Account_h__Case___4E88ABD4">
+            <End Role="Case_Number" EntitySet="Case_Number" />
+            <End Role="Account_has_Case" EntitySet="Account_has_Case" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ICT2202ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="idAccount" />
+          </Key>
+          <Property Name="idAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Account_has_Case" Relationship="Self.FK__Account_h__Accou__4D94879B" FromRole="Account" ToRole="Account_has_Case" />
+        </EntityType>
+        <EntityType Name="Account_has_Case">
+          <Key>
+            <PropertyRef Name="Account_idAccount" />
+            <PropertyRef Name="Case_idCase" />
+          </Key>
+          <Property Name="Account_idAccount" Type="Int32" Nullable="false" />
+          <Property Name="Case_idCase" Type="Int32" Nullable="false" />
+          <Property Name="Last_modified" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_accessed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account_h__Accou__4D94879B" FromRole="Account_has_Case" ToRole="Account" />
+          <NavigationProperty Name="Case_Number" Relationship="Self.FK__Account_h__Case___4E88ABD4" FromRole="Account_has_Case" ToRole="Case_Number" />
+        </EntityType>
+        <EntityType Name="Case_Number">
+          <Key>
+            <PropertyRef Name="idCase" />
+          </Key>
+          <Property Name="idCase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hash" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Account_has_Case" Relationship="Self.FK__Account_h__Case___4E88ABD4" FromRole="Case_Number" ToRole="Account_has_Case" />
+        </EntityType>
+        <Association Name="FK__Account_h__Accou__4D94879B">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="idAccount" />
+            </Principal>
+            <Dependent Role="Account_has_Case">
+              <PropertyRef Name="Account_idAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_h__Case___4E88ABD4">
+          <End Role="Case_Number" Type="Self.Case_Number" Multiplicity="1" />
+          <End Role="Account_has_Case" Type="Self.Account_has_Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Case_Number">
+              <PropertyRef Name="idCase" />
+            </Principal>
+            <Dependent Role="Account_has_Case">
+              <PropertyRef Name="Case_idCase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ICT2202ProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Account_has_Case" EntityType="Self.Account_has_Case" />
+          <EntitySet Name="Case_Number" EntityType="Self.Case_Number" />
+          <AssociationSet Name="FK__Account_h__Accou__4D94879B" Association="Self.FK__Account_h__Accou__4D94879B">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Account_has_Case" EntitySet="Account_has_Case" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_h__Case___4E88ABD4" Association="Self.FK__Account_h__Case___4E88ABD4">
+            <End Role="Case_Number" EntitySet="Case_Number" />
+            <End Role="Account_has_Case" EntitySet="Account_has_Case" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ICT2202ProjectModelStoreContainer" CdmEntityContainer="ICT2202ProjectEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ICT2202ProjectModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="idAccount" ColumnName="idAccount" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_has_Case">
+            <EntityTypeMapping TypeName="ICT2202ProjectModel.Account_has_Case">
+              <MappingFragment StoreEntitySet="Account_has_Case">
+                <ScalarProperty Name="Account_idAccount" ColumnName="Account_idAccount" />
+                <ScalarProperty Name="Case_idCase" ColumnName="Case_idCase" />
+                <ScalarProperty Name="Last_modified" ColumnName="Last_modified" />
+                <ScalarProperty Name="Last_accessed" ColumnName="Last_accessed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Case_Number">
+            <EntityTypeMapping TypeName="ICT2202ProjectModel.Case_Number">
+              <MappingFragment StoreEntitySet="Case_Number">
+                <ScalarProperty Name="idCase" ColumnName="idCase" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

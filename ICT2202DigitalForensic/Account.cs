@@ -7,22 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ICT2202DigitalForensic.Models
+namespace ICT2202DigitalForensic
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Case_Number
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Case_Number()
+        public Account()
         {
             this.Account_has_Case = new HashSet<Account_has_Case>();
         }
     
-        public int idCase { get; set; }
-        public string Name { get; set; }
-        public string Hash { get; set; }
+        public int idAccount { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account_has_Case> Account_has_Case { get; set; }

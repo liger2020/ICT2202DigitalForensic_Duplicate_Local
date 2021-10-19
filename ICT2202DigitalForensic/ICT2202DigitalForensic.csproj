@@ -136,29 +136,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Account.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Account.cs">
-      <DependentUpon>Account.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Account.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Account.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Account1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Account.tt</DependentUpon>
+      <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Account_has_Case.cs">
-      <DependentUpon>Account.tt</DependentUpon>
+      <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Case_Number.cs">
-      <DependentUpon>Account.tt</DependentUpon>
+      <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICT2202DigitalForensic.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICT2202DigitalForensic.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICT2202DigitalForensic.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICT2202DigitalForensic.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICT2202DigitalForensic.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,24 +171,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Account.Context.tt">
+    <Content Include="Models\ICT2202DigitalForensic.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Account.Context.cs</LastGenOutput>
-      <DependentUpon>Account.edmx</DependentUpon>
+      <DependentUpon>ICT2202DigitalForensic.edmx</DependentUpon>
+      <LastGenOutput>ICT2202DigitalForensic.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Account.tt">
+    <Content Include="Models\ICT2202DigitalForensic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Account.edmx</DependentUpon>
-      <LastGenOutput>Account1.cs</LastGenOutput>
+      <DependentUpon>ICT2202DigitalForensic.edmx</DependentUpon>
+      <LastGenOutput>ICT2202DigitalForensic.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Account.edmx">
+    <EntityDeploy Include="Models\ICT2202DigitalForensic.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Account.Designer.cs</LastGenOutput>
+      <LastGenOutput>ICT2202DigitalForensic.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Account.edmx.diagram">
-      <DependentUpon>Account.edmx</DependentUpon>
+    <Content Include="Models\ICT2202DigitalForensic.edmx.diagram">
+      <DependentUpon>ICT2202DigitalForensic.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

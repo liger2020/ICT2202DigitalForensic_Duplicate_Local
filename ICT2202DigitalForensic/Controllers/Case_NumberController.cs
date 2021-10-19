@@ -46,7 +46,7 @@ namespace ICT2202DigitalForensic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idCase,Name")] Case_Number case_Number)
+        public ActionResult Create([Bind(Include = "idCase,Name,Hash")] Case_Number case_Number)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ICT2202DigitalForensic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idCase,Name")] Case_Number case_Number)
+        public ActionResult Edit([Bind(Include = "idCase,Name,Hash")] Case_Number case_Number)
         {
             if (ModelState.IsValid)
             {
