@@ -2,7 +2,7 @@
     ViewBag.Title = "Upload";
 }
 
-<h2>Upload Image</h2>
+<h2>Upload File</h2>
 
 <p>
     @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new {enctype = "multipart/form-data" }))
@@ -15,10 +15,10 @@
 <ul style="list-style-type: none; padding:0;">
     @foreach(var item in Model)
             {
-                <li>
-                    <img src="@item" alt="images" width="100" height="100"/>
-                    <a src="@item" href="#" onclick="deleteImage('@item');">Delete</a>
-                </li>
+    <li>
+        <p>@item</p>
+        <a src="@item" href="#" onclick="deleteImage('@item');">Delete</a>
+    </li>
             }
 </ul>
 

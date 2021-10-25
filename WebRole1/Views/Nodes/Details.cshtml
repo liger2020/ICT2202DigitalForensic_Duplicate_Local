@@ -1,0 +1,26 @@
+﻿@model WebRole1.Models.Node
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Node</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IP_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP_Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idNode }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

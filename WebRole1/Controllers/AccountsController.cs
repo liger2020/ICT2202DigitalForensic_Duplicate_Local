@@ -6,17 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ICT2202DigitalForensic.Models;
-using System.Security.Cryptography;
-using System.Text;
+using WebRole1.Models;
 
-namespace ICT2202DigitalForensic.Controllers
+namespace WebRole1.Controllers
 {
     public class AccountsController : Controller
     {
         private ICT2202ProjectEntities db = new ICT2202ProjectEntities();
-        byte[] tmpSource;
-        byte[] tmpHash;
 
         // GET: Accounts
         public ActionResult Index()
@@ -37,31 +33,6 @@ namespace ICT2202DigitalForensic.Controllers
                 return HttpNotFound();
             }
             return View(account);
-        }
-
-        // GET: Accounts/Login
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        // POST: Accounts/Login
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "Username, Password")] Account account)
-        {
-            if (ModelState.IsValid)
-            {
-                //Need to change this into LINQ Query
-                var verify = db.Accounts.SqlQuery("SELECT * FROM Account WHERE Username = 'test' AND Password = 'check';");
-                if(verify.Count() == 0)
-                {
-                    return RedirectToAction("Accounts/Edit");
-                }
-            }
-            return RedirectToAction("Index");
         }
 
         // GET: Accounts/Create
@@ -151,20 +122,6 @@ namespace ICT2202DigitalForensic.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public string Hash_function(string password)
-        {
-            tmpSource = ASCIIEncoding.ASCII.GetBytes(password);
-            tmpHash = new SHA256CryptoServiceProvider().ComputeHash(tmpSource);
-            //Convert ByteArrayToString
-            int i;
-            StringBuilder sOutput = new StringBuilder(tmpHash.Length);
-            for (i = 0; i < tmpHash.Length; i++)
-            {
-                sOutput.Append(tmpHash[i].ToString("X2"));
-            }
-            return sOutput.ToString();
         }
     }
 }
