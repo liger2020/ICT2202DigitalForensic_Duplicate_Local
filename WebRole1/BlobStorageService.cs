@@ -10,11 +10,23 @@ namespace WebRole1
 {
     public class BlobStorageService
     {
-        public CloudBlobContainer GetCloudBlobContainer()
+        public CloudBlobContainer GetCloudBlobContainer(string case_id = "myimages")
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("AzuriteBlobStorage"));
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer blobContainer = blobClient.GetContainerReference("myimages");
+            CloudBlobContainer blobContainer = blobClient.GetContainerReference(case_id);
+            if (blobContainer.CreateIfNotExists())
+            {
+                blobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+            }
+            return blobContainer;
+        }
+
+        public CloudBlobContainer GetCloudBlobContainerCase(string new_case_id = "myimages")
+        {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("AzuriteBlobStorage"));
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer blobContainer = blobClient.GetContainerReference(new_case_id);
             if (blobContainer.CreateIfNotExists())
             {
                 blobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });

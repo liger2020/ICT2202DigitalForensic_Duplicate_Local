@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Upload New Case";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UploadCase</title>
+</head>
+<body>
+    <div>
+        <p>
+            @using (Html.BeginForm("UploadCase", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="file" />
+                <input type="submit" value="Upload" />
+            }
+        </p>
+    </div>
+</body>
+</html>

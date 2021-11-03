@@ -35,6 +35,33 @@ namespace WebRole1.Controllers
             return View(account);
         }
 
+        // GET: Accounts/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Accounts/Login
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login([Bind(Include = "Username, Password")] Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                //Need to change this into LINQ Query (Need to Santize the Input to prevent SQL Injection)
+                var verify = db.Accounts.SqlQuery("SELECT * FROM Account WHERE Username = @p0 AND Password = @p1;", account.Username, account.Password);
+                if (verify.Count() == 0) //If failed Verfication
+                {
+                    return View(); //Need to understand how does (Return View() work)
+                }
+            }
+            //GetIP();
+            Session["Username"] = account.Username;
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: Accounts/Create
         public ActionResult Create()
         {
@@ -52,7 +79,7 @@ namespace WebRole1.Controllers
             {
                 db.Accounts.Add(account);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
 
             return View(account);
@@ -122,6 +149,16 @@ namespace WebRole1.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public string GetIP()
+        {
+            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+            return ip;
         }
     }
 }

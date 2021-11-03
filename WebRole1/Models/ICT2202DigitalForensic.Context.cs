@@ -27,5 +27,7 @@ namespace WebRole1.Models
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Node> Nodes { get; set; }
+
+        public System.Data.Entity.DbSet<WebRole1.Models.CaseInfo> CaseInfoes { get; set; }
     }
 }

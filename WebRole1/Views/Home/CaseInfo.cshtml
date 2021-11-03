@@ -1,0 +1,44 @@
+﻿@model List<WebRole1.Models.Block>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CaseInfo</title>
+</head>
+<body>
+    <div style="margin-top:20px"> 
+        @{ 
+            <table class="table table-bordered table-condensed table-hover table-striped">
+                <tr>
+                    <th>Block Hash</th>
+                    <th>Block Number</th>
+                    <th>ID</th>
+                    <th>Log</th>
+                    <th>Meta Data</th>
+                    <th>Previous Block Hash</th>
+                    <th>Status</th>
+                    <th>TimeStamp</th>
+                </tr>
+                    @foreach(var blocks in Model)
+                    {
+            <tr>
+                <th>@blocks.block_hash</th>
+                <th>@blocks.block_number</th>
+                <th>@blocks.id</th>
+                <th>@blocks.log</th>
+                <th>@blocks.meta_data</th>
+                <th>@blocks.previous_block_hash</th>
+                <th>@blocks.status</th>
+                <th>@blocks.timestamp</th>
+            </tr>
+                    }
+            </table>
+        }
+    </div>
+    <div>
+        @Html.ActionLink("Upload New Evidence", "UploadEvidence", "Home")
+    </div>
+</body>
+</html>
