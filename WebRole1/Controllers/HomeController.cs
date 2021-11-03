@@ -33,20 +33,20 @@ namespace WebRole1.Controllers
         public ActionResult Index()
         {
             dynamic multiModel = new ExpandoObject();
-            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT Username = '" + (string)Session["username"] + "';");
+            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT Username = '" + (string)Session["Username"] + "';");
             ReceiveCase caseid = getusercase();
             multiModel.listUser = getUser;
             multiModel.listcase = caseid;
             ViewBag.Userlist = new MultiSelectList(listuser());
-            ViewBag.Message = "Welcome " + (string)Session["username"];
-            if (multiModel.listcase != null) //Remove caseid as verification
-            {
+            ViewBag.Message = "Welcome " + (string)Session["Username"];
+            //if (multiModel.listcase != null) //Remove caseid as verification
+            //{
                 return View(multiModel);
-            }
-            else
-            {
-                return View();
-            }
+            //}
+            //else
+            //{
+                //return View();
+            //}
         }
 
         [HttpGet]
@@ -60,7 +60,7 @@ namespace WebRole1.Controllers
         {
             Dictionary<int, string> keyValues = new Dictionary<int, string>();
             List<string> users = new List<string>();
-            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT Username = '" + (string)Session["username"] + "';");
+            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT Username = '" + (string)Session["Username"] + "';");
             foreach (var name in getUser)
             {
                 //keyValues.Add(name.idAccount, name.First_Name);
@@ -105,7 +105,7 @@ namespace WebRole1.Controllers
         public ActionResult UploadCase(HttpPostedFileBase file) //Upload a new case to blob storage
         {
             List<string> user_list = new List<string>();
-            user_list.Add((string)Session["username"]);
+            user_list.Add((string)Session["Username"]);
             if (file.ContentLength > 0)
             {
                 string random_id = RandomString(10);
@@ -135,7 +135,7 @@ namespace WebRole1.Controllers
         public ActionResult UploadEvidence(HttpPostedFileBase file)
         {
             List<string> user_list = new List<string>();
-            user_list.Add((string)Session["username"]);
+            user_list.Add((string)Session["Username"]);
             if (file.ContentLength > 0)
             {
                 CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer((string)Session["case_id"]);
@@ -192,8 +192,8 @@ namespace WebRole1.Controllers
 
         public static string Date_time()
         {
-            DateTime now = new DateTime();
-            return now.ToString();
+            DateTime dateTime = DateTime.Now;
+            return dateTime.ToString();
         }
 
         public static string RandomString(int size, bool lowerCase = false)
@@ -252,7 +252,7 @@ namespace WebRole1.Controllers
             outside.Pool = pools;
             string hello = JsonConvert.SerializeObject(outside);
 
-            var url = "http://192.168.50.253:5000/receiveblock";
+            var url = "http://10.6.0.3:5000/receiveblock";
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -279,7 +279,7 @@ namespace WebRole1.Controllers
         public static string requestCaseInfo(string case_id)
         {
             string result;
-            var url = "http://192.168.50.253:5000/caseinfo";
+            var url = "http://10.6.0.3:5000/caseinfo";
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -328,7 +328,7 @@ namespace WebRole1.Controllers
         public static string usercase(string username) //Get all cases assigned to user
         {
             string result;
-            var url = "http://192.168.50.253:5000/usercase";
+            var url = "http://10.6.0.3:5000/usercase";
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -356,7 +356,7 @@ namespace WebRole1.Controllers
         public ReceiveCase getusercase() //Get usercase
         {
             List<string> number_cases = new List<string>();
-            string checkvalue = usercase((string)Session["username"]);
+            string checkvalue = usercase((string)Session["Username"]);
             ReceiveCase details = JsonConvert.DeserializeObject<ReceiveCase>(checkvalue);
             return details;
         }

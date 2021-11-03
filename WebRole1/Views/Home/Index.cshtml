@@ -10,14 +10,15 @@
             <tr>
                 <th>Case ID</th>
                 <th>More Info</th>
-                <th>Assign/Remove User</th>
             </tr>
             <tr>
-                @for (int i = 0; i < Model.listcase.Cases.Count; i++)
+                @if (Model.listcase != null)
                 {
-                    <th>@Model.listcase.Cases[i]</th>
-                    <th>@Html.ActionLink("Case Info", "GetCaseID", "Home", new { case_id = Model.listcase.Cases[i] }, null)</th>
-                    <th>@Html.ActionLink("Assign/Remove User", "AssignRemoveUser")</th>
+                    for (int i = 0; i < Model.listcase.Cases.Count; i++)
+                    {
+                        <th>@Model.listcase.Cases[i]</th>
+                        <th>@Html.ActionLink("Case Info", "GetCaseID", "Home", new { case_id = Model.listcase.Cases[i] }, null)</th>
+                    }
                 }
             </tr>
         </thead>
