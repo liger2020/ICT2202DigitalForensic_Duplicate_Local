@@ -52,13 +52,17 @@ namespace WebRole1.Controllers
             {
                 //Need to change this into LINQ Query (Need to Santize the Input to prevent SQL Injection)
                 var verify = db.Accounts.SqlQuery("SELECT * FROM Account WHERE Username = @p0 AND Password = @p1;", account.Username, account.Password);
-                if (verify.Count() == 0) //If failed Verfication
+                if (verify.Count() != 0) //If failed Verfication
+                {
+                    List<Account> user = verify.ToList();
+                    Session["Username"] = user[0].Username;
+                    Session["First_Name"] = user[0].First_Name;
+                }
+                else
                 {
                     return View(); //Need to understand how does (Return View() work)
                 }
             }
-            //GetIP();
-            Session["Username"] = account.Username;
             return RedirectToAction("Index", "Home");
         }
 

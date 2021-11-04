@@ -11,16 +11,16 @@
                 <th>Case ID</th>
                 <th>More Info</th>
             </tr>
-            <tr>
-                @if (Model.listcase != null)
+            @if (Model.listcase != null)
+            {
+                for (int i = 0; i < Model.listcase.Cases.Count; i++)
                 {
-                    for (int i = 0; i < Model.listcase.Cases.Count; i++)
-                    {
+                    <tr>
                         <th>@Model.listcase.Cases[i]</th>
                         <th>@Html.ActionLink("Case Info", "GetCaseID", "Home", new { case_id = Model.listcase.Cases[i] }, null)</th>
-                    }
+                    </tr>
                 }
-            </tr>
+             }
         </thead>
     </table>
     <div>

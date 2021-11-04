@@ -33,20 +33,13 @@ namespace WebRole1.Controllers
         public ActionResult Index()
         {
             dynamic multiModel = new ExpandoObject();
-            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT Username = '" + (string)Session["Username"] + "';");
+            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT First_Name = '" + (string)Session["First_Name"] + "';");
             ReceiveCase caseid = getusercase();
             multiModel.listUser = getUser;
             multiModel.listcase = caseid;
             ViewBag.Userlist = new MultiSelectList(listuser());
-            ViewBag.Message = "Welcome " + (string)Session["Username"];
-            //if (multiModel.listcase != null) //Remove caseid as verification
-            //{
-                return View(multiModel);
-            //}
-            //else
-            //{
-                //return View();
-            //}
+            ViewBag.Message = "Welcome " + (string)Session["First_Name"];
+            return View(multiModel);
         }
 
         [HttpGet]
@@ -58,12 +51,10 @@ namespace WebRole1.Controllers
 
         public List<string> listuser()
         {
-            Dictionary<int, string> keyValues = new Dictionary<int, string>();
             List<string> users = new List<string>();
-            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT Username = '" + (string)Session["Username"] + "';");
+            IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT First_Name = '" + (string)Session["First_Name"] + "';");
             foreach (var name in getUser)
             {
-                //keyValues.Add(name.idAccount, name.First_Name);
                 users.Add(name.First_Name);
             }
             return users;
@@ -104,8 +95,13 @@ namespace WebRole1.Controllers
         [HttpPost]
         public ActionResult UploadCase(HttpPostedFileBase file) //Upload a new case to blob storage
         {
+            List<Log> logs = new List<Log>();
             List<string> user_list = new List<string>();
-            user_list.Add((string)Session["Username"]);
+            user_list.Add((string)Session["First_Name"]);
+            var b_first = l_log("Upload", user_list);
+            var b_second = l_log("AddUser", user_list);
+            logs.Add(b_first);
+            logs.Add(b_second);
             if (file.ContentLength > 0)
             {
                 string random_id = RandomString(10);
@@ -113,9 +109,12 @@ namespace WebRole1.Controllers
                 CloudBlockBlob blob = blobContainer.GetBlockBlobReference(file.FileName);
                 blob.UploadFromStream(file.InputStream);
                 string a = local_path(file.FileName);
-                var b = l_log("Upload", user_list);
+                //var b = l_log("Upload", user_list);
                 var c = s_meta(a, file.FileName, Date_time(), Date_time());
-                case_meta_data(random_id, c, b);
+                for(int i = 0; i < 2; i++)
+                {
+                    case_meta_data(random_id, c, logs[i]);
+                }
             }
             return RedirectToAction("Index");
         }
@@ -135,7 +134,7 @@ namespace WebRole1.Controllers
         public ActionResult UploadEvidence(HttpPostedFileBase file)
         {
             List<string> user_list = new List<string>();
-            user_list.Add((string)Session["Username"]);
+            user_list.Add((string)Session["First_Name"]);
             if (file.ContentLength > 0)
             {
                 CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer((string)Session["case_id"]);
@@ -144,7 +143,7 @@ namespace WebRole1.Controllers
                 string a = local_path(file.FileName);
                 var b = l_log("Upload",user_list);
                 var c = s_meta(a,file.FileName, Date_time(),Date_time());
-                case_meta_data(RandomString(10),c, b);
+                case_meta_data(Session["case_id"].ToString(), c, b);
             }
             return RedirectToAction("UploadEvidence");
         }
@@ -252,7 +251,7 @@ namespace WebRole1.Controllers
             outside.Pool = pools;
             string hello = JsonConvert.SerializeObject(outside);
 
-            var url = "http://10.6.0.3:5000/receiveblock";
+            var url = "http://192.168.50.253:5000/receiveblock";
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -279,7 +278,7 @@ namespace WebRole1.Controllers
         public static string requestCaseInfo(string case_id)
         {
             string result;
-            var url = "http://10.6.0.3:5000/caseinfo";
+            var url = "http://192.168.50.253:5000/caseinfo";
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -325,10 +324,10 @@ namespace WebRole1.Controllers
             return RedirectToAction("CaseInfo");
         }
 
-        public static string usercase(string username) //Get all cases assigned to user
+        public static string usercase(string name) //Get all cases assigned to user
         {
             string result;
-            var url = "http://10.6.0.3:5000/usercase";
+            var url = "http://192.168.50.253:5000/usercase";
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -336,7 +335,7 @@ namespace WebRole1.Controllers
             httpRequest.ContentType = "application/json";
             httpRequest.Headers["Authorization"] = "Bearer secret-token-1";
 
-            var data = "{\"Username\":" + "\"" + username + "\"}";
+            var data = "{\"Username\":" + "\"" + name + "\"}";
 
             using (var streamWriter = new StreamWriter(httpRequest.GetRequestStream()))
             {
@@ -356,7 +355,7 @@ namespace WebRole1.Controllers
         public ReceiveCase getusercase() //Get usercase
         {
             List<string> number_cases = new List<string>();
-            string checkvalue = usercase((string)Session["Username"]);
+            string checkvalue = usercase((string)Session["First_Name"]);
             ReceiveCase details = JsonConvert.DeserializeObject<ReceiveCase>(checkvalue);
             return details;
         }
@@ -388,6 +387,7 @@ namespace WebRole1.Controllers
             }
             var a = s_meta("", "", "", "");
             var b = l_log("AddUser", adduser);
+            case_meta_data(Session["case_id"].ToString(),a,b);
             //case_meta_data(RandomString(10),a ,b);
 
             return View(user);
@@ -409,6 +409,21 @@ namespace WebRole1.Controllers
 
 
             return items;
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Accounts");
+        }
+
+        [HttpPost]
+        public ActionResult DownloadEvidence(string filename)
+        {
+            CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer();
+            CloudBlockBlob blob = blobContainer.GetBlockBlobReference(filename);
+            
+            return View();
         }
     }
 }
