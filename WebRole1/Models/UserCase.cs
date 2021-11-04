@@ -7,7 +7,7 @@ namespace WebRole1.Models
 {
         public class SendUser
         {
-            public string Username { get; set; }
+            public List<string> Username { get; set; }
         }
 
         public class ReceiveCase

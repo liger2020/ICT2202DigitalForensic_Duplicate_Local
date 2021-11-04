@@ -30,6 +30,14 @@ namespace WebRole1.Controllers
 
         string id;
 
+        bool corrupted = false;
+
+        string server1 = "http://10.6.0.3:5000/";
+
+        string server2 = "http://10.6.0.2:5000/";
+
+        List<string> evidence_name = new List<string>();
+
         public ActionResult Index()
         {
             dynamic multiModel = new ExpandoObject();
@@ -108,7 +116,7 @@ namespace WebRole1.Controllers
                 CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainerCase(random_id); //Create a new container (Folder)
                 CloudBlockBlob blob = blobContainer.GetBlockBlobReference(file.FileName);
                 blob.UploadFromStream(file.InputStream);
-                string a = local_path(file.FileName);
+                string a = local_path("C:\\Users\\super\\Pictures\\ImageUploadTest\\" + file.FileName);
                 //var b = l_log("Upload", user_list);
                 var c = s_meta(a, file.FileName, Date_time(), Date_time());
                 for(int i = 0; i < 2; i++)
@@ -140,7 +148,7 @@ namespace WebRole1.Controllers
                 CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer((string)Session["case_id"]);
                 CloudBlockBlob blob = blobContainer.GetBlockBlobReference(file.FileName);
                 blob.UploadFromStream(file.InputStream);
-                string a = local_path(file.FileName);
+                string a = local_path("C:\\Users\\super\\Pictures\\ImageUploadTest\\" + file.FileName);
                 var b = l_log("Upload",user_list);
                 var c = s_meta(a,file.FileName, Date_time(),Date_time());
                 case_meta_data(Session["case_id"].ToString(), c, b);
@@ -167,7 +175,7 @@ namespace WebRole1.Controllers
         {
             var test = new HomeController();
             //string file_path = Path.GetFullPath(file);
-            byte[] byte_stream = test.Hash_function("C:\\Users\\super\\Pictures\\ImageUploadTest\\" + file);
+            byte[] byte_stream = test.Hash_function(file);
             string hex_string = BytesToString(byte_stream);
             return hex_string;
         }
@@ -231,7 +239,7 @@ namespace WebRole1.Controllers
             return log;
         }
 
-        public static Pool case_meta_data(string random_caseid, Meta_Data meta_Data, Log log)
+        public Pool case_meta_data(string random_caseid, Meta_Data meta_Data, Log log)
         {
             var sent = new Pool
             {
@@ -240,19 +248,31 @@ namespace WebRole1.Controllers
                 log = log
             };
             sendPool(sent);
+            if (corrupted)
+            {
+                sendPool(sent);
+            }
             return sent;
         }
 
-        public static void sendPool(Pool outside_Pool)
+        public void sendPool(Pool outside_Pool)
         {
+            string result;
+            string url;
             Outside_Pool outside = new Outside_Pool();
             List<Pool> pools = new List<Pool>();
             pools.Add(outside_Pool);
             outside.Pool = pools;
             string hello = JsonConvert.SerializeObject(outside);
 
-            var url = "http://192.168.50.253:5000/receiveblock";
-
+            if (corrupted)
+            {
+                url = server2 + "receiveblock";
+            }
+            else
+            {
+                url = server1 + "receiveblock";
+            }
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
 
@@ -269,16 +289,32 @@ namespace WebRole1.Controllers
             var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                var result = streamReader.ReadToEnd();
+                result = streamReader.ReadToEnd();
             }
 
-            Console.WriteLine(httpResponse.StatusCode);
+            if (result.Contains("Blockchain Verification Failed"))
+            {
+                corrupted = true;
+                Console.WriteLine("Corrupted");
+            }
+            else
+            {
+                corrupted = false;
+            }
         }
 
-        public static string requestCaseInfo(string case_id)
+        public string requestCaseInfo(string case_id)
         {
+            string url;
             string result;
-            var url = "http://192.168.50.253:5000/caseinfo";
+            if (corrupted)
+            {
+                url = server2 + "caseinfo";
+            }
+            else
+            {
+                url = server1 + "caseinfo";
+            }
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -297,8 +333,17 @@ namespace WebRole1.Controllers
             var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                
                 result = streamReader.ReadToEnd();
+            }
+
+            if (result.Contains("Blockchain Verification Failed"))
+            {
+                corrupted = true;
+                Console.WriteLine("Corrupted");
+            }
+            else
+            {
+                corrupted = false;
             }
             return result;
         }//Get CaseInfo
@@ -306,6 +351,10 @@ namespace WebRole1.Controllers
         public ActionResult CaseInfo(string id)
         {
             string getcaseInfo = requestCaseInfo((string)Session["case_id"]);
+            if (corrupted)
+            {
+                getcaseInfo = requestCaseInfo((string)Session["case_id"]);
+            }
             List<Block> block = new List<Block>();
             if(getcaseInfo.Contains("fail, cannot find case_id") != true)
             {
@@ -324,10 +373,18 @@ namespace WebRole1.Controllers
             return RedirectToAction("CaseInfo");
         }
 
-        public static string usercase(string name) //Get all cases assigned to user
+        public string usercase(string name) //Get all cases assigned to user
         {
+            string url;
             string result;
-            var url = "http://192.168.50.253:5000/usercase";
+            if (corrupted)
+            {
+                url = server2 + "usercase";
+            }
+            else
+            {
+                url = server1 + "usercase";
+            }
 
             var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             httpRequest.Method = "POST";
@@ -348,7 +405,15 @@ namespace WebRole1.Controllers
                 result = streamReader.ReadToEnd();
             }
             
-            Console.WriteLine(httpResponse.StatusCode);
+            if (result.Contains("Blockchain Verification Failed"))
+            {
+                corrupted = true;
+                Console.WriteLine("Corrupted");
+            }
+            else
+            {
+                corrupted = false;
+            }
             return result;
         }
 
@@ -356,6 +421,10 @@ namespace WebRole1.Controllers
         {
             List<string> number_cases = new List<string>();
             string checkvalue = usercase((string)Session["First_Name"]);
+            if (corrupted)
+            {
+               checkvalue = usercase((string)Session["First_Name"]);
+            }
             ReceiveCase details = JsonConvert.DeserializeObject<ReceiveCase>(checkvalue);
             return details;
         }
@@ -417,13 +486,107 @@ namespace WebRole1.Controllers
             return RedirectToAction("Login", "Accounts");
         }
 
-        [HttpPost]
-        public ActionResult DownloadEvidence(string filename)
+        public ActionResult DownloadEvidence()
         {
-            CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer();
-            CloudBlockBlob blob = blobContainer.GetBlockBlobReference(filename);
-            
+            GetEvidence(); //Downloading Evidence
+            Dictionary<string, string> blobFileNameHash = new Dictionary<string, string>();
+            Dictionary<string, string> serverFileNameHash = new Dictionary<string, string>();
+            var abc = GetFileNameHash();
+            if (corrupted)
+            {
+                abc = GetFileNameHash();
+            }
+            RootFileNameHash details = JsonConvert.DeserializeObject<RootFileNameHash>(abc);
+            for(int i = 0; i < details.Files.Count();i++)
+            {
+                serverFileNameHash.Add(details.Files[i].File_name, details.Files[i].File_Hash);
+            }
+            for (int i = 0; i < evidence_name.Count; i++)
+            {
+                byte[] hashbyte = Hash_function("C:\\Users\\super\\Desktop\\DownloadBlob\\" + evidence_name[i]);
+                string bytestring = BytesToString(hashbyte);
+                blobFileNameHash.Add(evidence_name[i], bytestring);
+            }
+
             return View();
         }
+
+        public void GetEvidence()
+        {
+            var abc = GetFileNameHash();
+            List<string> downloadUser = new List<string>();
+            downloadUser.Add((string)Session["First_Name"]);
+            CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer((string)Session["case_id"]);
+            var list = blobContainer.ListBlobs();
+            List<string> a = list.OfType<CloudBlockBlob>().Select(b => b.Name).ToList();
+            foreach(var b in a)
+            {
+                evidence_name.Add(b);
+                CloudBlockBlob blob = blobContainer.GetBlockBlobReference(b);
+                FileStream file = System.IO.File.OpenWrite("C:\\Users\\super\\Desktop\\DownloadBlob\\" + b);
+                blob.DownloadToStream(file);
+                file.Close();
+            }
+            var c = s_meta("", "", Date_time(), Date_time());
+            var d = l_log("DownloadEvidence", downloadUser);
+            case_meta_data((string)Session["case_id"], c, d);
+        }
+
+        public string GetFileNameHash() //Get File Name and Hash from Blockchain
+        {
+            string result;
+            string url;
+            if (corrupted)
+            {
+                url = server2 + "filenameAndHash";
+            }
+            else
+            {
+                url = server1 + "filenameAndHash";
+            }
+
+            var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpRequest.Method = "POST";
+
+            httpRequest.ContentType = "application/json";
+            httpRequest.Headers["Authorization"] = "Bearer secret-token-1";
+
+            var data = "{\"case_id\":\"" + (string)Session["case_id"] + "\"}";
+
+            using (var streamWriter = new StreamWriter(httpRequest.GetRequestStream()))
+            {
+                streamWriter.Write(data);
+            }
+
+            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            Console.WriteLine(httpResponse.StatusCode);
+            if (result.Contains("Blockchain Verification Failed"))
+            {
+                corrupted = true;
+                Console.WriteLine("Corrupted");
+            }
+            else
+            {
+                corrupted = false;
+            }
+            return result;
+        }
+
+        /*public bool checkError(Dictionary<string,string> server, Dictionary<string,string> blob)
+        {
+            evidence_name.
+            for(int i = 0; i < server.Count; i++)
+            {
+                if (server[])
+                {
+
+                }
+            }
+        }*/
     }
 }

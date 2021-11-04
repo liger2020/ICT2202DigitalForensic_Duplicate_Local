@@ -187,6 +187,7 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileNameHash.cs" />
     <Compile Include="Models\ICT2202DigitalForensic.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -280,6 +281,7 @@
     <Content Include="Views\Home\CaseInfo.cshtml" />
     <Content Include="Views\Home\UploadCase.cshtml" />
     <Content Include="Views\Home\AssignRemoveUser.cshtml" />
+    <Content Include="Views\Home\DownloadEvidence.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
