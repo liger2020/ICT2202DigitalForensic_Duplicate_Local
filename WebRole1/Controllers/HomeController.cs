@@ -43,6 +43,10 @@ namespace WebRole1.Controllers
             dynamic multiModel = new ExpandoObject();
             IEnumerable<Account> getUser = db.Accounts.SqlQuery("SELECT * FROM Account WHERE NOT First_Name = '" + (string)Session["First_Name"] + "';");
             ReceiveCase caseid = getusercase();
+            if (corrupted)
+            {
+                return RedirectToAction("Contact");
+            }
             multiModel.listUser = getUser;
             multiModel.listcase = caseid;
             ViewBag.Userlist = new MultiSelectList(listuser());
@@ -129,6 +133,7 @@ namespace WebRole1.Controllers
 
         public ActionResult UploadEvidence()
         {
+            ViewBag.DuplicateEvidence = "Please do not upload duplicate evidence";
             CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer();
             List<string> blobs = new List<string>();
             foreach (var blobItem in blobContainer.ListBlobs())
@@ -146,14 +151,24 @@ namespace WebRole1.Controllers
             if (file.ContentLength > 0)
             {
                 CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer((string)Session["case_id"]);
-                CloudBlockBlob blob = blobContainer.GetBlockBlobReference(file.FileName);
-                blob.UploadFromStream(file.InputStream);
-                string a = local_path("C:\\Users\\super\\Pictures\\ImageUploadTest\\" + file.FileName);
-                var b = l_log("Upload",user_list);
-                var c = s_meta(a,file.FileName, Date_time(),Date_time());
-                case_meta_data(Session["case_id"].ToString(), c, b);
+                List<string> checkName = GetEvidenceName(blobContainer);
+                if (checkName.Contains(file.FileName) == false) // Means the file haven't been uploaded beforehand
+                {
+                    CloudBlockBlob blob = blobContainer.GetBlockBlobReference(file.FileName);
+                    blob.UploadFromStream(file.InputStream);
+                    string a = local_path("C:\\Users\\super\\Pictures\\ImageUploadTest\\" + file.FileName);
+                    var b = l_log("Upload", user_list);
+                    var c = s_meta(a, file.FileName, Date_time(), Date_time());
+                    case_meta_data(Session["case_id"].ToString(), c, b);
+                }
+                else //Means Evidence has been uploaded before
+                {
+                    ViewBag.DuplicateEvidence = "Evidence has been uploaded before";
+                    return View();
+                }
             }
-            return RedirectToAction("UploadEvidence");
+            //ViewBag.DuplicateEvidence = "Evidence has been successfully uploaded";
+            return RedirectToAction("CaseInfo");
         }
 
         [HttpPost]
@@ -354,6 +369,10 @@ namespace WebRole1.Controllers
             if (corrupted)
             {
                 getcaseInfo = requestCaseInfo((string)Session["case_id"]);
+                if (corrupted)
+                {
+                    return RedirectToAction("Contact");
+                }
             }
             List<Block> block = new List<Block>();
             if(getcaseInfo.Contains("fail, cannot find case_id") != true)
@@ -425,6 +444,10 @@ namespace WebRole1.Controllers
             {
                checkvalue = usercase((string)Session["First_Name"]);
             }
+            if(checkvalue.Contains("Blockchain Verification Failed"))
+            {
+                return null;
+            }
             ReceiveCase details = JsonConvert.DeserializeObject<ReceiveCase>(checkvalue);
             return details;
         }
@@ -457,8 +480,6 @@ namespace WebRole1.Controllers
             var a = s_meta("", "", "", "");
             var b = l_log("AddUser", adduser);
             case_meta_data(Session["case_id"].ToString(),a,b);
-            //case_meta_data(RandomString(10),a ,b);
-
             return View(user);
         }
 
@@ -495,6 +516,10 @@ namespace WebRole1.Controllers
             if (corrupted)
             {
                 abc = GetFileNameHash();
+                if (corrupted)
+                {
+                    return RedirectToAction("Contact");
+                }
             }
             RootFileNameHash details = JsonConvert.DeserializeObject<RootFileNameHash>(abc);
             for(int i = 0; i < details.Files.Count();i++)
@@ -507,7 +532,14 @@ namespace WebRole1.Controllers
                 string bytestring = BytesToString(hashbyte);
                 blobFileNameHash.Add(evidence_name[i], bytestring);
             }
-
+            if (checkError(serverFileNameHash,blobFileNameHash))
+            {
+                //Delete the files downloaded
+                DeleteFiles();
+                //ViewBag.DownloadError("Files corrupted. Will be changing server. Please try again");
+                return RedirectToAction("CaseInfo");
+            }
+            //ViewBag.DownloadError("Download Completed");
             return View();
         }
 
@@ -517,9 +549,8 @@ namespace WebRole1.Controllers
             List<string> downloadUser = new List<string>();
             downloadUser.Add((string)Session["First_Name"]);
             CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainer((string)Session["case_id"]);
-            var list = blobContainer.ListBlobs();
-            List<string> a = list.OfType<CloudBlockBlob>().Select(b => b.Name).ToList();
-            foreach(var b in a)
+            List<string> a = GetEvidenceName(blobContainer);
+            foreach (var b in a)
             {
                 evidence_name.Add(b);
                 CloudBlockBlob blob = blobContainer.GetBlockBlobReference(b);
@@ -577,16 +608,42 @@ namespace WebRole1.Controllers
             return result;
         }
 
-        /*public bool checkError(Dictionary<string,string> server, Dictionary<string,string> blob)
+        public bool checkError(Dictionary<string,string> server, Dictionary<string,string> blob) //Check if there are any file tempering
         {
-            evidence_name.
-            for(int i = 0; i < server.Count; i++)
+            bool tampering = false;
+            for(int i = 0; i < evidence_name.Count; i++)
             {
-                if (server[])
+                if(server[evidence_name[i]] != blob[evidence_name[i]])
                 {
-
+                    tampering = true;
                 }
             }
-        }*/
+            return tampering;
+        }
+
+        public List<string> GetEvidenceName(CloudBlobContainer cloudBlobContainer) //Get Evidence Name List
+        {
+            var list = cloudBlobContainer.ListBlobs();
+            List<string> EvidenceNamelist = list.OfType<CloudBlockBlob>().Select(b => b.Name).ToList();
+            return EvidenceNamelist;
+        }
+
+        public void DeleteFiles()
+        {
+            try
+            {
+                for(int i = 0; i < evidence_name.Count; i++)
+                {
+                    if (System.IO.File.Exists(Path.Combine("C:\\Users\\super\\Desktop\\DownloadBlob\\",evidence_name[i])))
+                    {
+                        System.IO.File.Delete(Path.Combine("C:\\Users\\super\\Desktop\\DownloadBlob\\", evidence_name[i]));
+                    }
+                }
+            }
+            catch(IOException ioExp) 
+            {
+                Console.WriteLine(ioExp.Message);
+            }
+        }
     }
 }

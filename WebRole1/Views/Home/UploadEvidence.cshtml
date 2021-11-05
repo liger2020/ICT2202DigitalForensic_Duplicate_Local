@@ -3,7 +3,7 @@
 }
 
 <h2>Upload File</h2>
-
+<b>@ViewBag.DuplicateEvidence;</b>
 <p>
     @using (Html.BeginForm("UploadEvidence", "Home", FormMethod.Post, new {enctype = "multipart/form-data" }))
             {
@@ -11,23 +11,3 @@
                 <input type="submit" value="Upload" />
             }
 </p>
-
-<ul style="list-style-type: none; padding:0;">
-    @foreach(var item in Model)
-            {
-    <li>
-        <p>@item</p>
-        <a src="@item" href="#" onclick="deleteImage('@item');">Delete</a>
-    </li>
-            }
-</ul>
-
-<script>
-    function deleteImage(item) {
-        var url = "/Home/DeleteImage";
-        $.post(url, { Name: item }, function (data) {
-            window.location.href = "/Home/Upload";
-            alert(data);
-        });
-    }
-</script>
