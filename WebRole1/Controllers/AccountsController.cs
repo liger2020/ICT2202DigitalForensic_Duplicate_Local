@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebRole1.Models;
@@ -12,7 +15,9 @@ namespace WebRole1.Controllers
 {
     public class AccountsController : Controller
     {
-        private ICT2202ProjectEntities db = new ICT2202ProjectEntities();
+        private ICT2202DFEntities db = new ICT2202DFEntities();
+
+        private SHA256 sha256 = SHA256.Create();
 
         // GET: Accounts
         public ActionResult Index()
@@ -163,6 +168,23 @@ namespace WebRole1.Controllers
                 ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
             return ip;
+        }
+
+        //Password Hash Function
+        private byte[] Hash_function(string password)
+        {
+            Byte[] byteArray = Encoding.UTF8.GetBytes(password);
+            using (MemoryStream stream = new MemoryStream(byteArray))
+            {
+                return sha256.ComputeHash(stream);
+            }
+        }
+
+        public static string BytesToString(byte[] bytes)
+        {
+            string result = "";
+            foreach (byte b in bytes) result += b.ToString("X2");
+            return result;
         }
     }
 }

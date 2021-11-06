@@ -45,6 +45,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.0.1\lib\netstandard2.0\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Identity.1.0.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Storage.Blobs, Version=12.2.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Storage.Blobs.12.2.0\lib\netstandard2.0\Azure.Storage.Blobs.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Storage.Common, Version=12.1.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Storage.Common.12.1.1\lib\netstandard2.0\Azure.Storage.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Storage.Files.Shares, Version=12.0.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Storage.Files.Shares.12.0.1\lib\netstandard2.0\Azure.Storage.Files.Shares.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Storage.Queues, Version=12.1.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Storage.Queues.12.1.1\lib\netstandard2.0\Azure.Storage.Queues.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -57,7 +75,40 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.2.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.2.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Azure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Azure.1.0.0\lib\netstandard2.0\Microsoft.Extensions.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.1.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.1.0\lib\net45\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>
@@ -72,7 +123,11 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.6.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -88,6 +143,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.4.5.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
     <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -112,6 +170,7 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -185,7 +244,22 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs">
-      <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
+      <DependentUpon>AzureICT2202ChainofCustody.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AzureICT2202ChainofCustody.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureICT2202ChainofCustody.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AzureICT2202ChainofCustody.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureICT2202ChainofCustody.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AzureICT2202ChainofCustody.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureICT2202ChainofCustody.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\FileNameHash.cs" />
     <Compile Include="Models\ICT2202DigitalForensic.Context.cs">
@@ -205,7 +279,7 @@
     </Compile>
     <Compile Include="Models\CaseInfo.cs" />
     <Compile Include="Models\Node.cs">
-      <DependentUpon>ICT2202DigitalForensic.tt</DependentUpon>
+      <DependentUpon>AzureICT2202ChainofCustody.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserCase.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -221,6 +295,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\AzureICT2202ChainofCustody.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AzureICT2202ChainofCustody.edmx</DependentUpon>
+      <LastGenOutput>AzureICT2202ChainofCustody.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AzureICT2202ChainofCustody.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AzureICT2202ChainofCustody.edmx</DependentUpon>
+      <LastGenOutput>AzureICT2202ChainofCustody.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ICT2202DigitalForensic.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ICT2202DigitalForensic.Context.cs</LastGenOutput>
@@ -239,6 +323,13 @@
     </EntityDeploy>
     <Content Include="Models\ICT2202DigitalForensic.edmx.diagram">
       <DependentUpon>ICT2202DigitalForensic.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AzureICT2202ChainofCustody.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AzureICT2202ChainofCustody.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AzureICT2202ChainofCustody.edmx.diagram">
+      <DependentUpon>AzureICT2202ChainofCustody.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WebRole120211105222831 - Web Deploy.pubxml" />

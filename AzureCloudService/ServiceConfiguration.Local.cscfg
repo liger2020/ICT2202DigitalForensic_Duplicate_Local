@@ -5,6 +5,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="AzuriteBlobStorage" value="UseDevelopmentStorage=true" />
+      <Setting name="AzureBlobStorage" value="DefaultEndpointsProtocol=https;AccountName=ict2202;AccountKey=zj7AUxdIJBVrYTb+9LqdiEvfBFkvpv6+me8AU58VC2+fqsuGvXw0b1WpbqqwBbZgG9mqKD5Qm4DmKbLZ4qh6eA==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

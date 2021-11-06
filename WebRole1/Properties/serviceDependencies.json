@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:ICT2202DF"
+    },
+    "storage1": {
+      "type": "storage",
+      "connectionId": "ICT2202DFBlob"
+    }
+  }
+}
