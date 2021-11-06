@@ -12,7 +12,7 @@ namespace WebRole1
     {
         public CloudBlobContainer GetCloudBlobContainer(string case_id = "myimages")
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("AzuriteBlobStorage"));
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("AzureBlobStorage"));
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer blobContainer = blobClient.GetContainerReference(case_id);
             if (blobContainer.CreateIfNotExists())
@@ -24,7 +24,7 @@ namespace WebRole1
 
         public CloudBlobContainer GetCloudBlobContainerCase(string new_case_id = "myimages")
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("AzuriteBlobStorage"));
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(RoleEnvironment.GetConfigurationSettingValue("AzureBlobStorage"));
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer blobContainer = blobClient.GetContainerReference(new_case_id);
             if (blobContainer.CreateIfNotExists())

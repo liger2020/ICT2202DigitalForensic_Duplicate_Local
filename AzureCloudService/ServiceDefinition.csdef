@@ -10,7 +10,6 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="AzuriteBlobStorage" />
       <Setting name="AzureBlobStorage" />
     </ConfigurationSettings>
     <Endpoints>
