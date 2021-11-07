@@ -126,19 +126,19 @@ The documentation is available in /docs directory.
 
 [blockchain-content]: https://liger2020.github.io/ICT2202DigitalForensic/images/block-content.png "Contents of Blockchain"
 
-[Login]: docs/LoginPage.jpg
+[Login]: docs/Images/LoginPage.jpg
 
-[CreateAccount]: docs/CreateAccount.jpg
+[CreateAccount]: docs/Images/CreateAccount.jpg
 
-[IndexPage]: docs/IndexPage.jpg
+[IndexPage]: docs/Images/IndexPage.jpg
 
-[UploadCase]: docs/UploadCase.jpg
+[UploadCase]: docs/Images/UploadCase.jpg
 
-[UploadFile]: docs/UploadFile.jpg
+[UploadFile]: docs/Images/UploadFile.jpg
 
-[DownloadEvidence]: docs/DownloadEvidence.jpg
+[DownloadEvidence]: docs/Images/DownloadEvidence.jpg
 
-[AssignUser]: docs/AssignUser.jpg
+[AssignUser]: docs/Images/AssignUser.jpg
 
 [^note]: This is an assignment for ICT2202.
 
