@@ -54,6 +54,9 @@ Navigate to the folder location where you git clone the solution. Select 'ICT220
 Create a folder called 'ImageUploadTest' in this Location and place all evidence files inside. (C:\Users\super\Pictures\ImageUploadTest)
 ![Upload Folder][UploadFolder]
 
+Create a folder called 'DownloadBlob' on Desktop. (C:\Users\super\Desktop\DownloadBlob)
+![Download Folder][DownloadFolder]
+
 Go the Project called WebRole1 and go to folder called Controllers under it. Double Click HomeController to open it.
 
 ![Configuration for the project][Configuration]
@@ -81,17 +84,17 @@ This is for creating user accounts.
 ![Account Creation using the Website][CreateAccount]
 
 ### Creating Case
-This is to create new Case based on the current user that is login. Upload Case from 'ImageUploadTest' folder that you created earlier. (C:\Users\super\Pictures\ImageUploadTest)
+This is to create new Case based on the current user that is login. Upload Case from 'ImageUploadTest' folder that you created earlier. (C:\Users\super\Pictures\ImageUploadTest) Please do not files exceeding that are too big. As, Azure Blob storage only has a capacity of 2GB.
 
 ![New Case Creation][UploadCase]
 
 ### Adding Evidence
-This is to add Evidence to existing Case. Upload evidence from 'ImageUploadTest' folder that you created earlier. (C:\Users\super\Pictures\ImageUploadTest)
+This is to add Evidence to existing Case. Upload evidence from 'ImageUploadTest' folder that you created earlier. (C:\Users\super\Pictures\ImageUploadTest) Please do not files exceeding that are too big. As, Azure Blob storage only has a capacity of 2GB.
 
 ![Adding Evidence to Case][UploadFile]
 
 ### Download Evidence
-This is to download evidences from the case
+This is to download evidences from the case. All the evidence will be downloaded to this folder 'DownloadBlob' that was created earlier.
 
 ![Download Evidence from the case][DownloadEvidence]
 
@@ -115,6 +118,8 @@ The documentation is available in /docs directory.
 [NavigateToFolderLocation]: docs/Images/NavigateToFolderLocation.jpg
 
 [UploadFolder]: docs/Images/UploadFolder.jpg
+
+[DownloadFolder]: docs/Images/DownloadFolder.jpg
 
 [Configuration]: docs/Images/Configuration.jpg
 
