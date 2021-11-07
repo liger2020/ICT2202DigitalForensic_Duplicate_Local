@@ -38,6 +38,11 @@ namespace WebRole1.Controllers
 
         List<string> evidence_name = new List<string>();
 
+
+        /// <summary>
+        /// This Return the list of case that the user is currently managing.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             dynamic multiModel = new ExpandoObject();
@@ -61,6 +66,10 @@ namespace WebRole1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// List user
+        /// </summary>
+        /// <returns></returns>
         public List<string> listuser()
         {
             List<string> users = new List<string>();
@@ -72,6 +81,10 @@ namespace WebRole1.Controllers
             return users;
         }
 
+        /// <summary>
+        /// About Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -79,6 +92,10 @@ namespace WebRole1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Contact Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -86,6 +103,10 @@ namespace WebRole1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Home Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Home()
         {
             ViewBag.Message = "User";
@@ -93,6 +114,10 @@ namespace WebRole1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Redirect to Upload New Case Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult UploadCase() //Maybe don't need (Can delete) See How
         {
             CloudBlobContainer blobContainer = _blobStorageService.GetCloudBlobContainerCase();
@@ -104,6 +129,11 @@ namespace WebRole1.Controllers
             return View(blobs);
         }
 
+        /// <summary>
+        /// Upload New case
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UploadCase(HttpPostedFileBase file) //Upload a new case to blob storage
         {
@@ -131,6 +161,10 @@ namespace WebRole1.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Redirect to UploadEvidence Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult UploadEvidence()
         {
             ViewBag.DuplicateEvidence = "Please do not upload duplicate evidence";
@@ -143,6 +177,11 @@ namespace WebRole1.Controllers
             return View(blobs);
         }
 
+        /// <summary>
+        /// Upload Evidence to Case
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UploadEvidence(HttpPostedFileBase file)
         {
@@ -185,7 +224,11 @@ namespace WebRole1.Controllers
             return "File Deleted.";
         }
 
-        //Get local file path
+        /// <summary>
+        /// Get local file path
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static string local_path(string file)
         {
             var test = new HomeController();
@@ -195,6 +238,11 @@ namespace WebRole1.Controllers
             return hex_string;
         }
 
+        /// <summary>
+        /// This takes in the file path with the file and create an hash in byte array
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         private byte[] Hash_function(string filepath)
         {
             //Compute the file's hash
@@ -204,7 +252,11 @@ namespace WebRole1.Controllers
             }
         }
 
-        //Return a byte array as a sequence of hex values.
+        /// <summary>
+        /// Return a byte array as a sequence of hex values.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         public static string BytesToString(byte[] bytes)
         {
             string result = "";
@@ -212,12 +264,22 @@ namespace WebRole1.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Give current Date Time
+        /// </summary>
+        /// <returns></returns>
         public static string Date_time()
         {
             DateTime dateTime = DateTime.Now;
             return dateTime.ToString();
         }
 
+        /// <summary>
+        /// Generate a random case id when a new case is being created
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="lowerCase"></param>
+        /// <returns></returns>
         public static string RandomString(int size, bool lowerCase = false)
         {
             var builder = new StringBuilder(size);
@@ -232,6 +294,14 @@ namespace WebRole1.Controllers
             return lowerCase ? builder.ToString().ToLower() : builder.ToString().ToLower();
         }
 
+        /// <summary>
+        /// Collate the meta data needed to be sent to the blockchain
+        /// </summary>
+        /// <param name="file_hash"></param>
+        /// <param name="file_name"></param>
+        /// <param name="m_date"></param>
+        /// <param name="c_date"></param>
+        /// <returns></returns>
         public Meta_Data s_meta(string file_hash, string file_name, string m_date, string c_date)
         {
             var meta = new Meta_Data
@@ -244,6 +314,12 @@ namespace WebRole1.Controllers
             return meta; 
         }
 
+        /// <summary>
+        /// Collate the Actions taken and which user generated the action. To be sent to blockchain
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public Log l_log(string action, List<string> username)
         {
             var log = new Log
@@ -254,6 +330,13 @@ namespace WebRole1.Controllers
             return log;
         }
 
+        /// <summary>
+        /// Combine the Meta_Data and Logs together to be sent to blockchain
+        /// </summary>
+        /// <param name="random_caseid"></param>
+        /// <param name="meta_Data"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
         public Pool case_meta_data(string random_caseid, Meta_Data meta_Data, Log log)
         {
             var sent = new Pool
@@ -270,6 +353,10 @@ namespace WebRole1.Controllers
             return sent;
         }
 
+        /// <summary>
+        /// The format to be sent to Blockchain
+        /// </summary>
+        /// <param name="outside_Pool"></param>
         public void sendPool(Pool outside_Pool)
         {
             string result;
@@ -318,6 +405,11 @@ namespace WebRole1.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Case Information from Blcokchain
+        /// </summary>
+        /// <param name="case_id"></param>
+        /// <returns></returns>
         public string requestCaseInfo(string case_id)
         {
             string url;
@@ -363,6 +455,11 @@ namespace WebRole1.Controllers
             return result;
         }//Get CaseInfo
 
+        /// <summary>
+        /// Request Case Information to be displayed in Index Page
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult CaseInfo(string id)
         {
             string getcaseInfo = requestCaseInfo((string)Session["case_id"]);
@@ -386,13 +483,23 @@ namespace WebRole1.Controllers
             return View(block);
         } //Display CaseInfo back to View
 
+        /// <summary>
+        /// Get the current CaseID
+        /// </summary>
+        /// <param name="case_id"></param>
+        /// <returns></returns>
         public ActionResult GetCaseID(string case_id)
         {
             Session["case_id"] = case_id;
             return RedirectToAction("CaseInfo");
         }
 
-        public string usercase(string name) //Get all cases assigned to user
+        /// <summary>
+        /// Get all cases assigned to user from Blockchain
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string usercase(string name)
         {
             string url;
             string result;
@@ -436,6 +543,10 @@ namespace WebRole1.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Parse Information sent from Blockchain
+        /// </summary>
+        /// <returns></returns>
         public ReceiveCase getusercase() //Get usercase
         {
             List<string> number_cases = new List<string>();
@@ -452,6 +563,10 @@ namespace WebRole1.Controllers
             return details;
         }
 
+        /// <summary>
+        /// Redirect User to Assign User page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AssignRemoveUser()
         {
             UserModel user = new UserModel();
@@ -460,6 +575,11 @@ namespace WebRole1.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Assign User to case
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AssignRemoveUser(UserModel user)
         {
@@ -483,6 +603,10 @@ namespace WebRole1.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Display user that can be selected
+        /// </summary>
+        /// <returns></returns>
         private static List<SelectListItem> PopulateUser()
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -501,12 +625,20 @@ namespace WebRole1.Controllers
             return items;
         }
 
+        /// <summary>
+        /// Logout remove all sessions
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logout()
         {
             Session.Abandon();
             return RedirectToAction("Login", "Accounts");
         }
 
+        /// <summary>
+        /// DownloadEvidence from the case
+        /// </summary>
+        /// <returns></returns>
         public ActionResult DownloadEvidence()
         {
             GetEvidence(); //Downloading Evidence
@@ -543,6 +675,9 @@ namespace WebRole1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Getting Evidence from Blob Storage
+        /// </summary>
         public void GetEvidence()
         {
             var abc = GetFileNameHash();
@@ -564,7 +699,11 @@ namespace WebRole1.Controllers
             case_meta_data((string)Session["case_id"], c, d);
         }
 
-        public string GetFileNameHash() //Get File Name and Hash from Blockchain
+        /// <summary>
+        /// //Get File Name and Hash from Blockchain
+        /// </summary>
+        /// <returns></returns>
+        public string GetFileNameHash()
         {
             string result;
             string url;
@@ -609,6 +748,12 @@ namespace WebRole1.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Check if the file downloaded are corrupted or tampered with
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="blob"></param>
+        /// <returns></returns>
         public bool checkError(Dictionary<string,string> server, Dictionary<string,string> blob) //Check if there are any file tempering
         {
             bool tampering = false;
@@ -622,6 +767,11 @@ namespace WebRole1.Controllers
             return tampering;
         }
 
+        /// <summary>
+        /// Getting the list of Evidence file Name
+        /// </summary>
+        /// <param name="cloudBlobContainer"></param>
+        /// <returns></returns>
         public List<string> GetEvidenceName(CloudBlobContainer cloudBlobContainer) //Get Evidence Name List
         {
             var list = cloudBlobContainer.ListBlobs();
@@ -629,6 +779,9 @@ namespace WebRole1.Controllers
             return EvidenceNamelist;
         }
 
+        /// <summary>
+        /// Delete Files
+        /// </summary>
         public void DeleteFiles()
         {
             try

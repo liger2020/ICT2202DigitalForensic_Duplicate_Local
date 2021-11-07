@@ -19,13 +19,20 @@ namespace WebRole1.Controllers
 
         private SHA256 sha256 = SHA256.Create();
 
-        // GET: Accounts
+        /// <summary>
+        /// GET: Accounts
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(db.Accounts.ToList());
         }
 
-        // GET: Accounts/Details/5
+        /// <summary>
+        /// Accounts/Details/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,15 +47,22 @@ namespace WebRole1.Controllers
             return View(account);
         }
 
-        // GET: Accounts/Login
+        /// <summary>
+        /// GET: Accounts/Login
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Login()
         {
             return View();
         }
 
-        // POST: Accounts/Login
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Accounts/Login (Action to Validate the Username and Password)
+        /// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login([Bind(Include = "Username, Password")] Account account)
@@ -71,15 +85,22 @@ namespace WebRole1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Accounts/Create
+        /// <summary>
+        /// GET: Accounts/Create
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Accounts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Accounts/Create (Create Account for user)
+        /// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idAccount,Username,Password,First_Name,Last_Name")] Account account)
@@ -94,7 +115,11 @@ namespace WebRole1.Controllers
             return View(account);
         }
 
-        // GET: Accounts/Edit/5
+        /// <summary>
+        /// GET: Accounts/Edit/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -125,7 +150,11 @@ namespace WebRole1.Controllers
             return View(account);
         }
 
-        // GET: Accounts/Delete/5
+        /// <summary>
+        /// GET: Accounts/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -140,7 +169,11 @@ namespace WebRole1.Controllers
             return View(account);
         }
 
-        // POST: Accounts/Delete/5
+        /// <summary>
+        /// POST: Accounts/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -160,6 +193,10 @@ namespace WebRole1.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Get IP of Computer
+        /// </summary>
+        /// <returns></returns>
         public string GetIP()
         {
             string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
@@ -170,7 +207,11 @@ namespace WebRole1.Controllers
             return ip;
         }
 
-        //Password Hash Function
+        /// <summary>
+        /// Password Hash Function
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private byte[] Hash_function(string password)
         {
             Byte[] byteArray = Encoding.UTF8.GetBytes(password);
@@ -180,6 +221,11 @@ namespace WebRole1.Controllers
             }
         }
 
+        /// <summary>
+        /// Change Byte to String (Hash)
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         public static string BytesToString(byte[] bytes)
         {
             string result = "";
