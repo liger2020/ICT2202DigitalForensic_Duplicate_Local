@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebRole1</name>
+    </assembly>
+    <members>
+        <member name="M:WebRole1.Controllers.AccountsController.Index">
+            <summary>
+            GET: Accounts
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Accounts/Details/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Login">
+            <summary>
+            GET: Accounts/Login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Login(WebRole1.Models.Account)">
+            <summary>
+            POST: Accounts/Login (Action to Validate the Username and Password)
+            To protect from overposting attacks, enable the specific properties you want to bind to, for 
+            more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Create">
+            <summary>
+            GET: Accounts/Create
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Create(WebRole1.Models.Account)">
+            <summary>
+            POST: Accounts/Create (Create Account for user)
+            To protect from overposting attacks, enable the specific properties you want to bind to, for 
+            more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+            </summary>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            GET: Accounts/Edit/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            GET: Accounts/Delete/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            POST: Accounts/Delete/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.GetIP">
+            <summary>
+            Get IP of Computer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.Hash_function(System.String)">
+            <summary>
+            Password Hash Function
+            </summary>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.AccountsController.BytesToString(System.Byte[])">
+            <summary>
+            Change Byte to String (Hash)
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.Index">
+            <summary>
+            This Return the list of case that the user is currently managing.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.listuser">
+            <summary>
+            List user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.About">
+            <summary>
+            About Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.Contact">
+            <summary>
+            Contact Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.Home">
+            <summary>
+            Home Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.UploadCase">
+            <summary>
+            Redirect to Upload New Case Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.UploadCase(System.Web.HttpPostedFileBase)">
+            <summary>
+            Upload New case
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.UploadEvidence">
+            <summary>
+            Redirect to UploadEvidence Page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.UploadEvidence(System.Web.HttpPostedFileBase)">
+            <summary>
+            Upload Evidence to Case
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.local_path(System.String)">
+            <summary>
+            Get local file path
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.Hash_function(System.String)">
+            <summary>
+            This takes in the file path with the file and create an hash in byte array
+            </summary>
+            <param name="filepath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.BytesToString(System.Byte[])">
+            <summary>
+            Return a byte array as a sequence of hex values.
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.Date_time">
+            <summary>
+            Give current Date Time
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.RandomString(System.Int32,System.Boolean)">
+            <summary>
+            Generate a random case id when a new case is being created
+            </summary>
+            <param name="size"></param>
+            <param name="lowerCase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.s_meta(System.String,System.String,System.String,System.String)">
+            <summary>
+            Collate the meta data needed to be sent to the blockchain
+            </summary>
+            <param name="file_hash"></param>
+            <param name="file_name"></param>
+            <param name="m_date"></param>
+            <param name="c_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.l_log(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Collate the Actions taken and which user generated the action. To be sent to blockchain
+            </summary>
+            <param name="action"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.case_meta_data(System.String,WebRole1.Models.Meta_Data,WebRole1.Models.Log)">
+            <summary>
+            Combine the Meta_Data and Logs together to be sent to blockchain
+            </summary>
+            <param name="random_caseid"></param>
+            <param name="meta_Data"></param>
+            <param name="log"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.sendPool(WebRole1.Models.Pool)">
+            <summary>
+            The format to be sent to Blockchain
+            </summary>
+            <param name="outside_Pool"></param>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.requestCaseInfo(System.String)">
+            <summary>
+            Get Case Information from Blcokchain
+            </summary>
+            <param name="case_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.CaseInfo(System.String)">
+            <summary>
+            Request Case Information to be displayed in Index Page
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.GetCaseID(System.String)">
+            <summary>
+            Get the current CaseID
+            </summary>
+            <param name="case_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.usercase(System.String)">
+            <summary>
+            Get all cases assigned to user from Blockchain
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.getusercase">
+            <summary>
+            Parse Information sent from Blockchain
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.AssignRemoveUser">
+            <summary>
+            Redirect User to Assign User page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.AssignRemoveUser(WebRole1.Models.UserModel)">
+            <summary>
+            Assign User to case
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.PopulateUser">
+            <summary>
+            Display user that can be selected
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.Logout">
+            <summary>
+            Logout remove all sessions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.DownloadEvidence">
+            <summary>
+            DownloadEvidence from the case
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.GetEvidence">
+            <summary>
+            Getting Evidence from Blob Storage
+            </summary>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.GetFileNameHash">
+            <summary>
+            //Get File Name and Hash from Blockchain
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.checkError(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Check if the file downloaded are corrupted or tampered with
+            </summary>
+            <param name="server"></param>
+            <param name="blob"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.GetEvidenceName(Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer)">
+            <summary>
+            Getting the list of Evidence file Name
+            </summary>
+            <param name="cloudBlobContainer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebRole1.Controllers.HomeController.DeleteFiles">
+            <summary>
+            Delete Files
+            </summary>
+        </member>
+    </members>
+</doc>
