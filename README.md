@@ -30,21 +30,38 @@ git clone https://github.com/liger2020/ICT2202DigitalForensic.git
 Navigate into the project folder:
 
 ## Installation Guide
+------------------
 Download Visual Studio 2019 Community version and run. The link is https://visualstudio.microsoft.com/downloads/
 
 ![Download Visual Studio 2019 Community][VisualStudio2019Download]
 
-Select 'ASP.NET and web development' and 'Azure Development' circled in red and install.
+Select 'ASP.NET and web development' and 'Azure Development' circled in red and scroll down and under Other Toolset. Select 'Data Storage and Processing' and install
 
 ![Install 'ASP.NET and web development' and 'Azure Development'][RequiredProgram]
 
-```bash
-cd ICT2202DigitalForensic
-```
+![Install 'Data Storage and processing'][RequiredProgram2]
+
+Launch Visual Studio 2019 and select 'Open a Project or Solution'.
+
+![Launch the IDE and click 'Open a Project or Solution'][OpenaProjectorsolution]
+
+Navigate to the folder location where you git clone the solution. Select 'ICT2202DigitalForensic.sln' to launch it
+
+![Launch the Project Solution][NavigateToFolderLocation]
 
 ## Configuration
 ----------------
+Go the Project called WebRole1 and go to folder called Controllers under it. Double Click HomeController to open it.
 
+![Configuration for the project][Configuration]
+
+Ensure that under the Solution Explorer tab. AzureCloudService is in bold, if not right click it and select (1) "Set as Startup Project". After that click on (2) "Web Server (Google Chrome)".
+
+![Select the Project Solution to run][RunSolution]
+
+During the opening or running of solution sometimes the Visual Studio IDE may encounter some problem. Hence, if errors occurs right click on the solution (ICT2202DigitalForensic.sln) and select (1) 'Clean solution' and then (2) 'Rebuild solution'. Before running it again
+
+![Potential Problem encounter when running][SolveError]
 
 ## User Guide
 -------------
@@ -87,6 +104,18 @@ The documentation is available in /docs directory.
 [VisualStudio2019Download]: docs/VisualStudio2019Download.jpg
 
 [RequiredProgram]: docs/RequiredProgram.jpg
+
+[RequiredProgram2]: docs/RequiredProgram2.jpg
+
+[OpenaProjectorsolution]: docs/OpenaProjectorsolution.jpg
+
+[NavigateToFolderLocation]: docs/NavigateToFolderLocation.jpg
+
+[Configuration]: docs/Configuration.jpg
+
+[RunSolution]: docs/RunSolution.jpg
+
+[SolveError]: docs/SolveError.jpg
 
 [case-management]: https://liger2020.github.io/ICT2202DigitalForensic/images/blockchain-case-management-server.png "Case Management System"
 
