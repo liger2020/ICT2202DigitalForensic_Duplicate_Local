@@ -51,8 +51,8 @@ Navigate to the folder location where you git clone the solution. Select 'ICT220
 
 ## Configuration
 ----------------
-Create a folder called 'UploadTest' under this File Location. (C:\Users\super\Pictures\UploadTest)
-
+Create a folder called 'ImageUploadTest' in this Location and place all evidence files inside. (C:\Users\super\Pictures\ImageUploadTest)
+![Upload Folder][UploadFolder]
 
 Go the Project called WebRole1 and go to folder called Controllers under it. Double Click HomeController to open it.
 
@@ -81,12 +81,12 @@ This is for creating user accounts.
 ![Account Creation using the Website][CreateAccount]
 
 ### Creating Case
-This is to create new Case based on the current user that is login
+This is to create new Case based on the current user that is login. Upload Case from 'ImageUploadTest' folder that you created earlier. (C:\Users\super\Pictures\ImageUploadTest)
 
 ![New Case Creation][UploadCase]
 
 ### Adding Evidence
-This is to add Evidence to existing Case
+This is to add Evidence to existing Case. Upload evidence from 'ImageUploadTest' folder that you created earlier. (C:\Users\super\Pictures\ImageUploadTest)
 
 ![Adding Evidence to Case][UploadFile]
 
@@ -113,6 +113,8 @@ The documentation is available in /docs directory.
 [OpenaProjectorsolution]: docs/Images/OpenaProjectorsolution.jpg
 
 [NavigateToFolderLocation]: docs/Images/NavigateToFolderLocation.jpg
+
+[UploadFolder]: docs/Images/UploadFolder.jpg
 
 [Configuration]: docs/Images/Configuration.jpg
 
