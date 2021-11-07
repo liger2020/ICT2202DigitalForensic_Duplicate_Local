@@ -51,6 +51,9 @@ Navigate to the folder location where you git clone the solution. Select 'ICT220
 
 ## Configuration
 ----------------
+Create a folder called 'UploadTest' under this File Location. (C:\Users\super\Pictures\UploadTest)
+
+
 Go the Project called WebRole1 and go to folder called Controllers under it. Double Click HomeController to open it.
 
 ![Configuration for the project][Configuration]
