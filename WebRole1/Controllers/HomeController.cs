@@ -554,6 +554,7 @@ namespace WebRole1.Controllers
             {
                 evidence_name.Add(b);
                 CloudBlockBlob blob = blobContainer.GetBlockBlobReference(b);
+                System.IO.Directory.CreateDirectory("C:\\Users\\super\\Desktop\\DownloadBlob\\");
                 FileStream file = System.IO.File.OpenWrite("C:\\Users\\super\\Desktop\\DownloadBlob\\" + b);
                 blob.DownloadToStream(file);
                 file.Close();
