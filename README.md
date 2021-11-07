@@ -101,21 +101,21 @@ This is to assign new users to existing case
 ----------------
 The documentation is available in /docs directory.
 
-[VisualStudio2019Download]: docs/VisualStudio2019Download.jpg
+[VisualStudio2019Download]: docs/Images/VisualStudio2019Download.jpg
 
-[RequiredProgram]: docs/RequiredProgram.jpg
+[RequiredProgram]: docs/Images/RequiredProgram.jpg
 
-[RequiredProgram2]: docs/RequiredProgram2.jpg
+[RequiredProgram2]: docs/Images/RequiredProgram2.jpg
 
-[OpenaProjectorsolution]: docs/OpenaProjectorsolution.jpg
+[OpenaProjectorsolution]: docs/Images/OpenaProjectorsolution.jpg
 
-[NavigateToFolderLocation]: docs/NavigateToFolderLocation.jpg
+[NavigateToFolderLocation]: docs/Images/NavigateToFolderLocation.jpg
 
-[Configuration]: docs/Configuration.jpg
+[Configuration]: docs/Images/Configuration.jpg
 
-[RunSolution]: docs/RunSolution.jpg
+[RunSolution]: docs/Images/RunSolution.jpg
 
-[SolveError]: docs/SolveError.jpg
+[SolveError]: docs/Images/SolveError.jpg
 
 [case-management]: https://liger2020.github.io/ICT2202DigitalForensic/images/blockchain-case-management-server.png "Case Management System"
 
